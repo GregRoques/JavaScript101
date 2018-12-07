@@ -14,7 +14,7 @@ function week(){
     num = 0
 
     while(num<7){
-        if(days.num == days[0] || days.num == days[6]){
+        if(days[num] == days[0] || days[num] == days[6]){
             return "Sleep in."
         } else {
             return "Go to Work."
@@ -25,32 +25,7 @@ function week(){
 
 console.log(week());
 
-// =============================================================Problem 3
 
-
-
-function calculate(bill,service){
-
-    var tip;
-    var total;
-
-    if(service == "good"){
-        tip = bill * .2;
-        total = bill + tip
-    } else if(service == "fair"){
-        tip = bill * .15;
-        total = bill + tip
-    } else if(service=="bad"){
-        tip = bill * .10;
-        total = bill + tip
-    } else{
-        return `No Tip? You are a terrible customer!`
-    }
-
-    return total;
-
-}
-console.log(calculate(100.00,"good"));
 
 // =============================================================Problem 2
 
@@ -73,10 +48,14 @@ function date(month, year){
     };
 
     if(month == "February"){
-        if(year % 400 != 0){
+        if(year % 400 == 0){
+            return calendar["February"] +1
+        } else if(year % 100 == 0) {
             return calendar["February"]
-        } else {
+        } else if(year % 4 == 0){
             return calendar["February"] + 1
+        } else {
+            return calendar["February"]
         }
 
     }else{
@@ -87,5 +66,41 @@ function date(month, year){
 console.log(date("February", 2000));
 
 
+// =============================================================Problem 3
 
+
+
+function calculate(bill,service){
+
+    // var tip;
+    // var total;
+
+    // if(service == "good"){
+    //     tip = bill * .2;
+       
+    // } else if(service == "fair"){
+    //     tip = bill * .15;
+        
+    // } else if(service=="bad"){
+    //     tip = bill * .10;
+        
+    // } else{
+    //     return `No Tip? You are a terrible customer!`
+    // }
+
+    // total = bill + tip
+    // roundedTotal = math.floor(total);
+    // roundedTotal = roundedTotal / 100;
+    // return "$" + roundedTotal;
+
+    var tipAmmount={
+        poor: .01,
+        fair: .15,
+        good: .2
+    }
+
+    console.log((total *tipAmmounts[service]) + total)
+
+}
+console.log(calculate(100.00,"good"));
 
