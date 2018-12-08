@@ -15,15 +15,17 @@ function week(){
 
     while(num<7){
         if(days[num] == days[0] || days[num] == days[6]){
-            return "Sleep in."
+            // return "Sleep in."
+            console.log("Sleep in.")
         } else {
-            return "Go to Work."
+            // return "Go to Work."
+            console.log("Go to Work.")
         }
         num++
     }
 }
 
-console.log(week());
+week();
 
 
 
@@ -72,35 +74,34 @@ console.log(date("February", 2000));
 
 function calculate(bill,service){
 
-    // var tip;
-    // var total;
+    var tip;
+    var total;
 
-    // if(service == "good"){
-    //     tip = bill * .2;
+    if(service == "good"){
+        tip = bill * .2;
        
-    // } else if(service == "fair"){
-    //     tip = bill * .15;
+    } else if(service == "fair"){
+        tip = bill * .15;
         
-    // } else if(service=="bad"){
-    //     tip = bill * .10;
+    } else if(service=="bad"){
+        tip = bill * .10;
         
-    // } else{
-    //     return `No Tip? You are a terrible customer!`
-    // }
-
-    // total = bill + tip
-    // roundedTotal = math.floor(total);
-    // roundedTotal = roundedTotal / 100;
-    // return "$" + roundedTotal;
-
-    var tipAmmount={
-        poor: .01,
-        fair: .15,
-        good: .2
+    } else{
+        return `No Tip? You are a terrible customer!`
     }
 
-    console.log((total *tipAmmounts[service]) + total)
+    total = bill + tip
+    roundedTotal = Math.floor(total);
+    console.log( "$" + roundedTotal)
+
+    // var tipAmmount={
+    //     poor: .01,
+    //     fair: .15,
+    //     good: .2
+    // }
+
+    // console.log((total *tipAmmounts[service]) + total)
 
 }
-console.log(calculate(100.00,"good"));
+calculate(100.00,"good");
 
