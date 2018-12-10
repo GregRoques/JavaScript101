@@ -1,0 +1,23 @@
+body{
+    background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPiFq9fY5Spew1im8y_ux1my6kp6r7J8c-wZKlLOlfxbfdEAZ0') repeat center;
+    color:white;    
+    height: 100vh;
+    text-align: center;
+    
+    
+}
+
+h1{
+    font-size: 60px;
+    margin: 40px 0px 0px;
+    text-shadow: 2px 2px 4px red;
+}
+
+.time-unit, .time-unit span{
+    display: inline-block;
+    padding: 10px;
+    background-color: white;
+    border-radius: 10px;
+    border: 1px solid green;
+    color: red;
+}

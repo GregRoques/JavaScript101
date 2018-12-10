@@ -104,7 +104,7 @@ function imaDragon(){
                 dragon.innerHTML =`
                 ${diceImg[dice[0]]}  ${diceImg[dice[1]]}
                 <br><br>
-                <img src="slayedDragon.jpg"/>
+                <img src="slayedDragon.png"/>
                 <br><br>
                 You killed the Dragon!
                 ` 
