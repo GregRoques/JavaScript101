@@ -10,7 +10,9 @@ var enemy = 20;
 var fightOpeningCounter = 0;
 
 
-dragon.innerHTML = `What would you like to do?\n
+dragon.innerHTML = `
+<img src="dragon.png"/><br><br>
+What would you like to do?\n
 <button class="button1">Fight</button> <button class="button2">Flee</button>`
 
 var button1 = document.getElementsByClassName("button1")[0];
@@ -76,6 +78,7 @@ function imaDragon(){
 
         if(enemy > 0){
             dragon.innerHTML =`
+            <img src="dragon.png"/><br><br>
                 ${diceImg[dice[0]]}  ${diceImg[dice[1]]}
                 <br><br>
                 
