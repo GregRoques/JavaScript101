@@ -1,6 +1,4 @@
-body{
-    background-color: green
-}
+
 
 #board{
     max-width: 640px;
@@ -19,4 +17,10 @@ body{
 
 .square:hover{
     background-color: red;
+}
+
+#message{
+    text-align: center;
+    font-size: 60px;
+    color: green;
 }
