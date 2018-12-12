@@ -1,4 +1,4 @@
-let player = 1;
+let count = 0;
 let gameOn = true;
 let player1Squares = [];
 let player2Squares = [];
@@ -17,30 +17,36 @@ const winningCombos = [
 
 const squares = document.getElementsByClassName('square');
 
-    if(gameOn){
+
+if(gameOn){
+    if (count < 9){
         for(let i = 0; i < squares.length; i++){
             
-            squares[i].addEventListener('click',function(event){
-                if(this.innerHTML === "-"){
-                    player1Squares.push(this.id)
-                    this.innerHTML = "X"; 
-                    document.getElementById('message').innerHTML = "It's O's turn"
-                    checkWin(player1Squares,1)
+                squares[i].addEventListener('click',function(event){
+                    if(this.innerHTML === "-"){
+                        count++
+                        player1Squares.push(this.id)
+                        this.innerHTML = "X"; 
+                        document.getElementById('message').innerHTML = "It's O's turn"
+                        checkWin(player1Squares,1)
 
-                  
-                    computerTurn();
-                
-                    document.getElementById('message').innerHTML = "It's X's turn"
-                    checkWin(player2Squares,2)
-                    
-                }else{
-                    document.getElementById('message').innerHTML = "Sorry, square's taken!"
-                }
-            })
+                        count++
+                        computerTurn();
+                        console.log(count)
+                        document.getElementById('message').innerHTML = "It's X's turn"
+                        checkWin(player2Squares,2)
+                        
+                    }else{
+                        document.getElementById('message').innerHTML = "Sorry, square's taken!"
+                    }
+                })
         
             
         }
     }
+}else{
+    endGame()
+}
 
 function checkWin(playerSquares, whoMarked){
     console.log("Checking to see who won...")
@@ -65,12 +71,18 @@ function checkWin(playerSquares, whoMarked){
 }
 
 function play(){
-    location.reload();
-    // player1Squares = [];
-    // player2Squares = [];
-    // squares.innerHTML = "-"
-    // gameOn = true;
-    // tTT();
+    // location.reload();
+    
+    for(let i = 0; i < squares.length; i++){
+        squares[i].innerHTML = "-";
+        squares[i].className = "square"
+    }
+    player1Squares =[];
+    player2Squares = []
+    count = 0
+    document.getElementById("message").innerHTML=""
+    document.querySelector("#continue").innerHTML =""
+    gameOn = true;
 
 }
 
@@ -95,38 +107,21 @@ function endGame(winningCombo,whoWon){
 // =============================================== Computer Turn
 function computerTurn() {
 
+
     const letter = ["A", "B", "C"]
    
     let randomLet = Math.floor(Math.random() * 3)
         let randomNum =  Math.ceil(Math.random() * 3)
         var computerMove = letter[randomLet] + randomNum.toString()
+        // console.log(computerMove)
     
-    for( let i =0;i<squares.length;i++){
-        if(squares[i].innerHTML != "O" || squares[i].innerHTML != "x"){
+   if (!player1Squares.includes(computerMove) && !player2Squares.includes(computerMove)){
             player2Squares.push(computerMove)
             squares[computerMove].innerHTML = "O";
+            // console.log(computerMove)
         } else {
             computerTurn()
         }
     }
 
 
-    
-}
-       
-
-
-
-
-  
-    
-
-
-
-// for (let i = 0; i < squares.length; i++){
-//     if (squares[i].innerHTML == "-"){
-//         squares[i].innerHTML = "O";
-//         player2Squares.push(this.id);
-//     }
-
-// }
