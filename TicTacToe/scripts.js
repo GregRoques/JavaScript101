@@ -20,48 +20,39 @@ const winningCombos = [
 
 const squares = document.getElementsByClassName('square');
 
-
-
+for(let i = 0; i < squares.length; i++){
     
-    for(let i = 0; i < squares.length; i++){
-        
-        squares[i].addEventListener('click',function(event){
+    squares[i].addEventListener('click',function(event){
+        if(gameOn){
+            if(this.innerHTML === "-"){
+                this.innerHTML = "X"; 
+                player1Squares.push(this.id)
+                checkWin(player1Squares,1)
+                
             if(gameOn){
-                if(this.innerHTML === "-"){
-                    this.innerHTML = "X"; 
-                    player1Squares.push(this.id)
-                    checkWin(player1Squares,1)
-                    
-                    
-                if(gameOn){
-                    count +=2
-                    computerTurn();
-                } 
-                    
-                    
-                }else{
-                    document.getElementById('message').innerHTML = "Sorry, square's taken!"
-                }
-            }    
-        })
-        
-    }
+                count +=2
+                computerTurn();
+            } 
+                
+            }else{
+                document.getElementById('message').innerHTML = "Sorry, square's taken!"
+            }
+        }    
+    })  
+}
 
 
 function checkWin(playerSquares, whoMarked){
     console.log("Checking to see who won...")
    
-    for(let i = 0; i < winningCombos.length; i++){
-       
+    for(let i = 0; i < winningCombos.length; i++){   
+        
         let squareCount = 0
         
         for(let j = 0; j < winningCombos[i].length; j++){
-            
             let winningSquare = winningCombos[i][j];
             if(playerSquares.includes(winningSquare)){
-                
                 squareCount++;
-                
             }
         }
         if(squareCount === 3){
