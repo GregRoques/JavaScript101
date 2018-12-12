@@ -16,11 +16,23 @@
 }
 
 .square:hover{
-    background-color: red;
+    background: red;
 }
 
 #message{
     text-align: center;
     font-size: 60px;
     color: green;
+}
+
+.winning-square{
+    background: yellow
+}
+
+#continue{
+    
+    position: absolute;
+    right: 50%;
+    bottom: 25px;
+    
 }
