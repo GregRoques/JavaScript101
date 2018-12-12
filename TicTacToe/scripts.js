@@ -19,33 +19,37 @@ const squares = document.getElementsByClassName('square');
 
 
 if(gameOn){
-    if (count < 9){
+    
         for(let i = 0; i < squares.length; i++){
             
                 squares[i].addEventListener('click',function(event){
-                    if(this.innerHTML === "-"){
-                        count++
-                        player1Squares.push(this.id)
-                        this.innerHTML = "X"; 
-                        document.getElementById('message').innerHTML = "It's O's turn"
-                        checkWin(player1Squares,1)
+                        if(this.innerHTML === "-"){
+                            if (count <= 9){
+                                count++
+                                player1Squares.push(this.id)
+                                this.innerHTML = "X"; 
+                                document.getElementById('message').innerHTML = "It's O's turn"
+                                checkWin(player1Squares,1)
 
-                        count++
-                        computerTurn();
-                        console.log(count)
-                        document.getElementById('message').innerHTML = "It's X's turn"
-                        checkWin(player2Squares,2)
-                        
-                    }else{
-                        document.getElementById('message').innerHTML = "Sorry, square's taken!"
-                    }
+                                count++
+                                computerTurn();
+                                // console.log(count)
+                                document.getElementById('message').innerHTML = "It's X's turn"
+                                checkWin(player2Squares,2)
+                            }else{
+                                GameOn = false;
+                                button()
+                            }    
+                            
+                        }else{
+                            document.getElementById('message').innerHTML = "Sorry, square's taken!"
+                        }
+                   
                 })
         
             
-        }
+        
     }
-}else{
-    endGame()
 }
 
 function checkWin(playerSquares, whoMarked){
@@ -98,6 +102,10 @@ function endGame(winningCombo,whoWon){
         squareElem.className += " winning-square"
     }
 
+   button()
+}
+
+function button(){
     document.querySelector("#continue").innerHTML +=`
     <button class="button">Play Again?</button>`
     var button = document.getElementsByClassName("button")[0];
