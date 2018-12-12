@@ -17,44 +17,31 @@ const winningCombos = [
 
 const squares = document.getElementsByClassName('square');
 
-// function tTT(){
     if(gameOn){
         for(let i = 0; i < squares.length; i++){
-            // if(player === 1){
-                    squares[i].addEventListener('click',function(event){
-                        if(this.innerHTML === "-"){
-                            this.innerHTML = "X"; 
-                            document.getElementById('message').innerHTML = "It's O's turn"
-                            player1Squares.push(this.id)
-                            checkWin(player1Squares,1)
-
-                            var computerMove = computerTurn();
-                            console.log(computerMove)
-                            squares[computerMove].innerHTML = "O";
-                            player2Squares.push(computerMove)
-                            // player = 1;
-                            document.getElementById('message').innerHTML = "It's X's turn"
-                            checkWin(player2Squares,2)
-                            
-                        }else{
-                            document.getElementById('message').innerHTML = "Sorry, square's taken!"
-                        }
-                    // player = 2; 
-                })
-                
-                // }else{
-                //     computerTurn();
-                //     player = 1;
-                //     document.getElementById('message').innerHTML = "It's X's turn"
-                //     checkWin(player2Squares,2)
-                // }
             
+            squares[i].addEventListener('click',function(event){
+                if(this.innerHTML === "-"){
+                    player1Squares.push(this.id)
+                    this.innerHTML = "X"; 
+                    document.getElementById('message').innerHTML = "It's O's turn"
+                    checkWin(player1Squares,1)
+
+                  
+                    computerTurn();
                 
+                    document.getElementById('message').innerHTML = "It's X's turn"
+                    checkWin(player2Squares,2)
+                    
+                }else{
+                    document.getElementById('message').innerHTML = "Sorry, square's taken!"
+                }
+            })
+        
             
         }
     }
-// }
-// tTT();
+
 function checkWin(playerSquares, whoMarked){
     console.log("Checking to see who won...")
    
@@ -112,39 +99,34 @@ function computerTurn() {
    
     let randomLet = Math.floor(Math.random() * 3)
         let randomNum =  Math.ceil(Math.random() * 3)
-        let move = letter[randomLet] + randomNum.toString()
-  
-
-    if(move != player1Squares.indexOf(move) && move != player2Squares.indexOf(move)){
-        return move
-    } 
+        var computerMove = letter[randomLet] + randomNum.toString()
     
-    
-    
-    
-    
-    
-    // const letter = ["A", "B", "C"]
-
-
-    //     let randomLet = Math.floor(Math.random() * 3)
-    //     let randomNum =  Math.ceil(Math.random() * 3)
-    //     let computerMove = letter[randomLet] + randomNum.toString()
-   
-
-
-
-    // if(computerMove != player1Squares.indexOf(computerMove) && computerMove != player2Squares.indexOf(computerMove)){
-    //     console.log(computerMove)
-    //     squares[computerMove].innerHTML = "O";
-    //     player2Squares.push(computerMove)
-    //     }else{
-    //     let randomLet = Math.floor(Math.random() * 3)
-    //     let randomNum =  Math.ceil(Math.random() * 3)
-    //     computerMove = letter[randomLet] + randomNum.toString()
-        
-    //     }
-        
-    
-   
+    for( let i =0;i<squares.length;i++){
+        if(squares[i].innerHTML != "O" || squares[i].innerHTML != "x"){
+            player2Squares.push(computerMove)
+            squares[computerMove].innerHTML = "O";
+        } else {
+            computerTurn()
+        }
     }
+
+
+    
+}
+       
+
+
+
+
+  
+    
+
+
+
+// for (let i = 0; i < squares.length; i++){
+//     if (squares[i].innerHTML == "-"){
+//         squares[i].innerHTML = "O";
+//         player2Squares.push(this.id);
+//     }
+
+// }
