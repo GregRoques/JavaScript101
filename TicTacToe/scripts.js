@@ -28,7 +28,10 @@ const squares = document.getElementsByClassName('square');
                             player1Squares.push(this.id)
                             checkWin(player1Squares,1)
 
-                            computerTurn();
+                            var computerMove = computerTurn();
+                            console.log(computerMove)
+                            squares[computerMove].innerHTML = "O";
+                            player2Squares.push(computerMove)
                             // player = 1;
                             document.getElementById('message').innerHTML = "It's X's turn"
                             checkWin(player2Squares,2)
@@ -105,27 +108,43 @@ function endGame(winningCombo,whoWon){
 // =============================================== Computer Turn
 function computerTurn() {
 
-    // for (let i=0; i<1; i++){
     const letter = ["A", "B", "C"]
-
-
-        let randomLet = Math.floor(Math.random() * 3)
+   
+    let randomLet = Math.floor(Math.random() * 3)
         let randomNum =  Math.ceil(Math.random() * 3)
-        let computerMove = letter[randomLet] + randomNum.toString()
+        let move = letter[randomLet] + randomNum.toString()
+  
+
+    if(move != player1Squares.indexOf(move) && move != player2Squares.indexOf(move)){
+        return move
+    } 
+    
+    
+    
+    
+    
+    
+    // const letter = ["A", "B", "C"]
+
+
+    //     let randomLet = Math.floor(Math.random() * 3)
+    //     let randomNum =  Math.ceil(Math.random() * 3)
+    //     let computerMove = letter[randomLet] + randomNum.toString()
    
 
 
 
-    while(computerMove == player1Squares || computerMove == player2Squares){
-        let randomLet = Math.floor(Math.random() * 3)
-        let randomNum =  Math.ceil(Math.random() * 3)
-        computerMove = letter[randomLet] + randomNum.toString()
-        }
-        console.log(computerMove)
-        squares[computerMove].innerHTML = "O";
-    player2Squares.push(computerMove)
-       
+    // if(computerMove != player1Squares.indexOf(computerMove) && computerMove != player2Squares.indexOf(computerMove)){
+    //     console.log(computerMove)
+    //     squares[computerMove].innerHTML = "O";
+    //     player2Squares.push(computerMove)
+    //     }else{
+    //     let randomLet = Math.floor(Math.random() * 3)
+    //     let randomNum =  Math.ceil(Math.random() * 3)
+    //     computerMove = letter[randomLet] + randomNum.toString()
         
-    //  } 
+    //     }
+        
+    
    
     }
