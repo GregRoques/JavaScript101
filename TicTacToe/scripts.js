@@ -3,6 +3,9 @@ let gameOn = true;
 let player1Squares = [];
 let player2Squares = [];
 
+console.log(player1Squares);
+console.log(player2Squares)
+
 const winningCombos = [
     ['A1','B1','C1'], //row 1
     ['A2','B2','C2'], //row 2
@@ -18,39 +21,32 @@ const winningCombos = [
 const squares = document.getElementsByClassName('square');
 
 
-if(gameOn){
-    
-        for(let i = 0; i < squares.length; i++){
-            
-                squares[i].addEventListener('click',function(event){
-                        if(this.innerHTML === "-"){
-                            if (count <= 9){
-                                count++
-                                player1Squares.push(this.id)
-                                this.innerHTML = "X"; 
-                                document.getElementById('message').innerHTML = "It's O's turn"
-                                checkWin(player1Squares,1)
 
-                                count++
-                                computerTurn();
-                                // console.log(count)
-                                document.getElementById('message').innerHTML = "It's X's turn"
-                                checkWin(player2Squares,2)
-                            }else{
-                                GameOn = false;
-                                button()
-                            }    
-                            
-                        }else{
-                            document.getElementById('message').innerHTML = "Sorry, square's taken!"
-                        }
-                   
-                })
+    
+    for(let i = 0; i < squares.length; i++){
         
-            
+        squares[i].addEventListener('click',function(event){
+            if(gameOn){
+                if(this.innerHTML === "-"){
+                    this.innerHTML = "X"; 
+                    player1Squares.push(this.id)
+                    checkWin(player1Squares,1)
+                    
+                    
+                if(gameOn){
+                    count +=2
+                    computerTurn();
+                } 
+                    
+                    
+                }else{
+                    document.getElementById('message').innerHTML = "Sorry, square's taken!"
+                }
+            }    
+        })
         
     }
-}
+
 
 function checkWin(playerSquares, whoMarked){
     console.log("Checking to see who won...")
@@ -65,6 +61,7 @@ function checkWin(playerSquares, whoMarked){
             if(playerSquares.includes(winningSquare)){
                 
                 squareCount++;
+                
             }
         }
         if(squareCount === 3){
@@ -72,6 +69,7 @@ function checkWin(playerSquares, whoMarked){
             endGame(winningCombos[i], whoMarked)
         }
     }
+    
 }
 
 function play(){
@@ -86,12 +84,14 @@ function play(){
     count = 0
     document.getElementById("message").innerHTML=""
     document.querySelector("#continue").innerHTML =""
+    document.querySelector('#message').innerHTML = `Game On!`
     gameOn = true;
 
 }
 
 function endGame(winningCombo,whoWon){
     gameOn = false;
+    console.log(gameOn)
    
     document.querySelector('#message').innerHTML = `Congrats to player ${whoWon}`
  
@@ -101,8 +101,9 @@ function endGame(winningCombo,whoWon){
         console.dir(squareElem)
         squareElem.className += " winning-square"
     }
-
-   button()
+        if (count <9){
+            button()
+        }
 }
 
 function button(){
@@ -115,21 +116,27 @@ function button(){
 // =============================================== Computer Turn
 function computerTurn() {
 
+            if (count <= 9){
+                const letter = ["A", "B", "C"]
 
-    const letter = ["A", "B", "C"]
-   
-    let randomLet = Math.floor(Math.random() * 3)
-        let randomNum =  Math.ceil(Math.random() * 3)
-        var computerMove = letter[randomLet] + randomNum.toString()
-        // console.log(computerMove)
-    
-   if (!player1Squares.includes(computerMove) && !player2Squares.includes(computerMove)){
-            player2Squares.push(computerMove)
-            squares[computerMove].innerHTML = "O";
-            // console.log(computerMove)
-        } else {
-            computerTurn()
-        }
-    }
+                let randomLet = Math.floor(Math.random() * 3)
+                    let randomNum =  Math.ceil(Math.random() * 3)
+                    var computerMove = letter[randomLet] + randomNum.toString()
+                    // console.log(computerMove)
+                
+                if (!player1Squares.includes(computerMove) && !player2Squares.includes(computerMove)){
+                        squares[computerMove].innerHTML = "O";
+                        player2Squares.push(computerMove)
+                        checkWin(player2Squares,2)
+                       
+                        
+                        // console.log(computerMove)
+                    } else {
+                        computerTurn()
+                    }
+            }else{
+                GameOn = false;
+                button()
+            }         
 
-
+}
