@@ -1,4 +1,5 @@
 let count = 0;
+let timer= 10;
 let gameOn = true;
 let player1Squares = [];
 let player2Squares = [];
@@ -24,22 +25,46 @@ for(let i = 0; i < squares.length; i++){
     
     squares[i].addEventListener('click',function(event){
         if(gameOn){
+            
             if(this.innerHTML === "-"){
-                this.innerHTML = "X"; 
-                player1Squares.push(this.id)
-                checkWin(player1Squares,1)
-                
-            if(gameOn){
-                count +=2
-                computerTurn();
-            } 
+                    
+                    this.innerHTML = "X"; 
+                    player1Squares.push(this.id)
+                    checkWin(player1Squares,1)
+                                            
+                    if(gameOn){
+                        count +=2
+                        timer = 10;
+                        setTimeout(computerTurn, 1000);
+                        timer = 10;
+                        
+                    }
+            
                 
             }else{
-                document.getElementById('message').innerHTML = "Sorry, square's taken!"
+                document.getElementById('#message').innerHTML = "Sorry, square's taken!"
             }
-        }    
+            
+        }
     })  
+  
 }
+
+if (gameOn && timer >1){
+   var counterOn =  setInterval(print, 1000);
+}
+
+// For the timer
+function print(){
+        timer--
+        document.getElementById('message').innerHTML = `Seconds left: ${timer}`
+        if(timer<1 && gameOn){
+            count +=2
+           computerTurn();
+           timer=10;
+        }
+    }
+
 
 
 function checkWin(playerSquares, whoMarked){
@@ -63,6 +88,8 @@ function checkWin(playerSquares, whoMarked){
     
 }
 
+// ================================================================= RESET FUNCTION
+
 function play(){
     // location.reload();
     
@@ -77,11 +104,15 @@ function play(){
     document.querySelector("#continue").innerHTML =""
     document.querySelector('#message').innerHTML = `Game On!`
     gameOn = true;
+    var counterOn =  setInterval(print, 1000);
 
 }
 
+// ================================================================= ENDGAME FUNCTION
+
 function endGame(winningCombo,whoWon){
     gameOn = false;
+    clearInterval(counterOn)
     console.log(gameOn)
    
     document.querySelector('#message').innerHTML = `Congrats to player ${whoWon}`
@@ -97,6 +128,9 @@ function endGame(winningCombo,whoWon){
         }
 }
 
+
+// ================================================================= POPULATE PLAY AGAIN? BUTTON
+
 function button(){
     document.querySelector("#continue").innerHTML +=`
     <button class="button">Play Again?</button>`
@@ -104,9 +138,10 @@ function button(){
     button.addEventListener("click", play)
 }
 
-// =============================================== Computer Turn
-function computerTurn() {
+// ================================================================= Computer Turn
 
+function computerTurn() {
+            
             if (count <= 9){
                 const letter = ["A", "B", "C"]
 
@@ -119,6 +154,8 @@ function computerTurn() {
                         squares[computerMove].innerHTML = "O";
                         player2Squares.push(computerMove)
                         checkWin(player2Squares,2)
+                        
+
                        
                         
                         // console.log(computerMove)
@@ -127,6 +164,7 @@ function computerTurn() {
                     }
             }else{
                 GameOn = false;
+                clearInterval(counterOn)
                 button()
             }         
 
