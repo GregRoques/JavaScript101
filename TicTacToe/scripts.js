@@ -1,3 +1,5 @@
+// ================================================================= VARIABLES & WINNING COMBO ARRAY
+
 let count = 0;
 let timer= 10;
 let gameOn = true;
@@ -18,6 +20,8 @@ const winningCombos = [
     ['A3','B2','C1'], //Diag 2
 ]
 
+
+// ================================================================= THE GAME
 
 const squares = document.getElementsByClassName('square');
 
@@ -50,11 +54,14 @@ for(let i = 0; i < squares.length; i++){
   
 }
 
-if (gameOn && timer >1){
-   var counterOn =  setInterval(print, 1000);
-}
 
-// For the timer
+// ================================================================= COUNTDOWN TIMER
+
+if (gameOn && timer >1){
+    var counterOn =  setInterval(print, 1000);
+ }
+ 
+
 function print(){
         timer--
         document.getElementById('message').innerHTML = `Seconds left: ${timer}`
@@ -65,7 +72,7 @@ function print(){
         }
     }
 
-
+// ================================================================= RESET CHECKWIN
 
 function checkWin(playerSquares, whoMarked){
     console.log("Checking to see who won...")
