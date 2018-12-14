@@ -4,12 +4,50 @@
 }
 
 .table{
-    background-color: #277714;
-    border: 5px solid #dcdcdc;
-    border-radius: 0px 0px 20px 20px;
+    margin-left: auto;
+    margin-right: auto; 
+    height: 500px;
  
     max-width: 800px;
+    border: 5px solid #dcdcdc;
+    /* border-bottom: 100px solid;
+    border-left: 80px solid transparent;
+    border-right: 80px solid transparent; */
+    border-radius: 0px 0px 60px 60px;
+    background-image: url('https://c1.staticflickr.com/4/3585/3446225050_aec0e07e4f_b.jpg');
+  
+    height: 500px;
+ 
+    max-width: 800px;
+}
+
+.player-total, .dealer-total{
+    padding-top: 8px;
+    font-family: 'Courgette', cursive;
+    font-size: 36px;
+    color:white;
+    text-align: center;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+
+}
+
+.player-cards, .dealer-cards{
+    display: absolute;
+    height: 140px;
+    margin-right: auto;
+    margin-left: auto;
+    width: 85%
     
+}
+
+.title{
+    font-family: 'Pacifico', cursive;
+    font-size: 60px;
+    text-align: center;
+
+    text-shadow: 2px 2px black;
+    color: red
     
 }
 
@@ -27,9 +65,10 @@
 }
 
 .card{
+    
     display: inline-block;
     margin-bottom: 5px;
-    width: 100px;
+    width: 85px;
    
     padding: 10px;
     
@@ -42,10 +81,12 @@
 
 .gameOver{
     transition: all 2s;
-    font-size: 1px;
-    font-family: 'Bungee', cursive;
-    color: blue;
-    text-shadow: 0.05px 0.05px blueviolet;
+    font-size: 0.75px;
+    font-family: 'Courgette', cursive;
+    color: red;
+    -webkit-text-stroke-width: 0.01px;
+    -webkit-text-stroke-color: black;
+    text-shadow: 0.025px 0.025px gold;
     text-align: center;
     margin-right: auto;
     margin-left: auto; 
@@ -57,4 +98,39 @@
     padding:10px;
     transform: scale(100)
    
+}
+
+.buttons{
+   display: flex;
+   justify-content: center;
+   margin-right:auto;
+   margin-left:10%;
+   padding-top: 15px;
+    
+}
+.deal-button, .hit-button, .stand-button {
+    display:inline-block;
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, sans-serif;
+    /* position: absolute; */
+    font-size: 18px;
+    text-transform: uppercase;
+    padding: 10px;
+    /* left: 50%; */
+    width: 100px;
+    margin-left: 10px;
+    margin-right: auto;
+    top: 50%;
+    border-radius: 10px;
+    color: white;
+    text-shadow: -1px -1px 1px rgba(0,0,0,0.8);
+    border: 5px solid transparent;
+    border-bottom-color: rgba(0,0,0,0.35);
+    background: darkred;
+    cursor: pointer;
+    outline: 0 !important;
+    transition: all 0.5s;
+}
+
+.deal-button:hover, .hit-button:hover, .stand-button:hover{
+    transform: scale(.75);
 }
