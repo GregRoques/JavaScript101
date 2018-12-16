@@ -1,0 +1,224 @@
+/* =============================================== Body */
+
+body{
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(#8ebcde,#0166b4);
+  /* background-repeat: no-repeat; */
+  background-size: cover;
+}
+
+/* ============================================================ ROW 1: Header */
+
+.title{
+  text-align: center;
+  font-size: 120px;
+
+}
+
+.titleText{
+  display: inline-block;
+  position: static;
+  color: white;
+  font-family: 'Courgette', cursive;
+  text-shadow: 4px 4px 2px violet;
+}
+
+
+.star{
+
+  display: inline-block;
+  text-align:center;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top:20px;
+  padding-right:35px;
+  padding-left:35px;
+  font-weight: bold;
+  color:transparent;
+  text-shadow: transparent;
+  opacity: 0;
+  animation: color-me-in 4s infinite; 
+  z-index: 0;
+  
+}
+@keyframes color-me-in {
+
+0% {
+  color: transparent;
+  text-shadow: transparent;
+  opacity: 0;
+ 
+}
+
+50% {
+  color: white;
+  text-shadow: 2px 0px 16px yellow;
+  opacity: 1;
+}
+100% {
+  color: transparent;
+  text-shadow: transparent;
+  opacity:0
+ 
+}
+}
+
+/* =========================================== ROW 2 */
+
+.centerDriedel{
+  display: inline-block;
+  position:absolute;
+  margin-right:auto;
+  margin-left: auto;
+  height: 200px;
+}
+
+.driedelBackground{
+  background-color:white;
+  border-radius:10px;
+  padding:5px;
+  opacity:.5;
+}
+
+.wrap {
+	perspective: 800px;
+  perspective-origin: 50% 100px;
+  
+
+ 
+}
+
+.cube {
+	position: relative;
+	width: 200px;
+	transform-style: preserve-3d;
+  animation: spin 5s infinite linear;
+  
+}
+
+.cube div {
+	position: absolute;
+	width: 200px;
+	height: 200px;
+}
+
+.back {
+	transform: translateZ(-100px) rotateY(180deg);
+}
+.right {
+	transform: rotateY(-270deg) translateX(100px);
+	transform-origin: top right;
+}
+.left {
+	transform: rotateY(270deg) translateX(-100px);
+	transform-origin: center left;
+}
+
+.front {
+	transform: translateZ(100px);
+}
+
+  .base {
+    background: gold;
+    display: inline-block;
+    height: 55px;
+    margin-left: 20px;
+    margin-bottom: 55px;
+    position: relative;
+    width: 100px;
+  }
+
+
+
+  .base:before {
+    border-top: 55px solid gold;
+    border-left: 100px solid transparent;
+    border-right: 100px solid transparent;
+    content: "";
+    height: 0;
+    left: 0;
+    position: absolute;
+    top: 200px;
+    width: 200px;
+   
+  }
+
+  .symbol{
+    text-align: center;
+    padding: 25 px;
+    font-size: 120px;
+    color:white;
+    text-shadow: 2px 2px 4px gray;
+  }
+/* apply spin animation */
+ 
+
+
+      @keyframes spin {
+        from { transform: rotateY(0); }
+        to { transform: rotateY(360deg); }
+      }
+
+      .centerDriedelTop{
+        display: inline-block;
+        width:200px;
+        margin-right:75px;
+        margin-left:75px;
+       
+      } 
+      .wrap2 {
+        perspective: 200px;
+        perspective-origin: 50% 25px;
+      
+       
+      }
+      
+      .cubeTop {
+        
+        position: relative;
+        width: 50px;
+        transform-style: preserve-3d;
+        animation: spin 5s infinite linear;
+        top:-75px
+        
+      }
+      
+      .cubeTop div {
+        position: absolute;
+        width: 50px;
+        height: 75px;
+        background: gold
+      }
+      .back2 {
+        transform: translateZ(25px) rotateY(180deg);
+      }
+      .right2 {
+        transform: rotateY(-270deg) translateX(25px);
+        transform-origin: top right;
+      }
+      .left2 {
+        transform: rotateY(270deg) translateX(-25px);
+        transform-origin: center left;
+      }
+      
+      .front2 {
+        transform: translateZ(-25px);
+      }
+/* ===================================================== */
+
+.moveBoard{
+  display:inline-block;
+  position: relative;
+  margin-right: auto;
+  margin-left: auto;
+  background-color: white;
+  width: 300px;
+  height: 300px;
+  border-radius: 10px;
+  opacity: 0.5;
+
+}
+
+
+
