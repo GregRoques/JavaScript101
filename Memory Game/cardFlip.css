@@ -1,0 +1,77 @@
+body{
+    background-image: linear-gradient(yellow,orange);
+    height: 800px;
+}
+
+img{
+    width: 250px;
+    height:250px;
+}
+
+/* the card is the grandparent and is the cube. It is a 3D place for children to play inside of. */
+.card{
+    width: 250px;
+    height: 250px;
+    perspective: 250px;
+    border: 2 px solid cornflowerblue;
+}
+
+.cardHolder{
+    width: 250px;
+    transition: all 2s;
+    /* the children of card holder will have absolute position;
+     */
+     position: relative;
+     /* tell all child elements that they are in 3D land */
+     transform-style: preserve-3d;
+     /* use Transform Origin to make it rotate from a specific access; effects like opening a door, etc. */
+    /* transform-origin: 20% 40%; */
+}
+
+.cardFront{
+    transform: rotateY(180deg);
+}
+
+.cardFront, .cardBack{
+    /* left 0 will be the left side of card holder; */
+    position: absolute;
+    top: 0;
+    left: 0;
+    backface-visibility: hidden;
+    
+}
+
+/* Make the parent div obvious: */
+.parent{
+    height: 250px;
+    width: 250px;
+    margin: 50px;
+    padding: 10px;
+    background-color: #4f5f6c;
+    perspective: 800px;
+}
+
+.parent div{
+    padding: 50px;
+    border: 1px solid #0912ee;
+}
+
+.threeD{
+    background-color: violet;
+    transform: rotateX(45deg);
+}
+
+.threeD2{
+    background-color: blue;
+    transform: rotateY(45deg);
+}
+
+.threeD3{
+    background-color:white;
+    transform: rotateZ(45deg);
+}
+
+.flip{
+    transform: rotateY(180deg);
+   
+}

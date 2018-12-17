@@ -1,5 +1,8 @@
 const freshDeck = createDeck();
 let theDeck = freshDeck.slice();
+let playerScore=0;
+let dealerScore=0;
+let oneDeal = 0
 let playerHand = [];
 let dealerHand = [];
 
@@ -7,48 +10,68 @@ let dealerHand = [];
 
 // blackjack deal function
 $('.deal-button').click(()=>{
-    // console.log("User clicked on the deal button")
-    // we need a deck!
-    theDeck = freshDeck.slice();
-    // we have a deck. we need to shuffle it!
-    shuffleDeck(theDeck);
-    // We have a shuffled deck now. Give each player their cards
-    // playerHand.push(theDeck[0])
-    // shift pulls the first element off of the array
-    // and retuns it
-    // console.log(theDeck)
-    // get the first element off of the deck and put it in topCard
-    let topCard = theDeck.shift();
-    // put topCard in the playerHand array
-    playerHand.push(topCard);
-    // Take next card in deck
-    topCard = theDeck.shift();
-    // give the dealer the new topCar
-    dealerHand.push(topCard);
-    topCard = theDeck.shift();
-    playerHand.push(topCard);
-    topCard = theDeck.shift();
-    dealerHand.push(topCard);
-    // console.log(theDeck.length)
-    placeCard('player',1,playerHand[0]);
-    placeCard('dealer',1,dealerHand[0]);
-    placeCard('player',2,playerHand[1]);
-    placeCard('dealer',2,dealerHand[1]);
-    calculateTotal(playerHand,'player')
-    calculateTotal(dealerHand,'dealer')
+    if(oneDeal<1){
+        // console.log("User clicked on the deal button")
+        // we need a deck!
+        theDeck = freshDeck.slice();
+        // we have a deck. we need to shuffle it!
+        shuffleDeck(theDeck);
+        // We have a shuffled deck now. Give each player their cards
+        // playerHand.push(theDeck[0])
+        // shift pulls the first element off of the array
+        // and retuns it
+        // console.log(theDeck)
+        // get the first element off of the deck and put it in topCard
+        let topCard = theDeck.shift();
+        // put topCard in the playerHand array
+        playerHand.push(topCard);
+        // Take next card in deck
+        topCard = theDeck.shift();
+        // give the dealer the new topCar
+        dealerHand.push(topCard);
+        topCard = theDeck.shift();
+        playerHand.push(topCard);
+        topCard = theDeck.shift();
+        dealerHand.push(topCard);
+        // console.log(theDeck.length)
+        placeCard('player',1,playerHand[0]);
+        placeCard('dealer',1,dealerHand[0]);
+        placeCard('player',2,playerHand[1]);
+        placeCard('dealer',2,dealerHand[1]);
+        calculateTotal(playerHand,'player')
+        calculateTotal(dealerHand,'dealer')
+        oneDeal = 20;
+    }else{
+        alert("You must Hit or Stand");
+    }
 })
 
 // ======================================================================== HIT BUTTON
 
 $('.hit-button').click(()=>{
-    // grab the next card in the deck 
-    
-    const topCard = theDeck.shift();
-    // push it onto the players Hand
-    playerHand.push(topCard)
-    placeCard('player',playerHand.length,topCard)
-    calculateTotal(playerHand, 'player')   
-    
+    if(oneDeal>0){
+        // grab the next card in the deck 
+
+        if(calculateTotal(playerHand,'player') <=21){
+        
+        const topCard = theDeck.shift();
+        // push it onto the players Hand
+        playerHand.push(topCard)
+        placeCard('player',playerHand.length,topCard)
+        calculateTotal(playerHand, 'player')   
+        }else{
+            let dealersTotal = calculateTotal(dealerHand,'dealer');
+            while (dealersTotal <21){
+                const topCard = theDeck.shift();
+                dealerHand.push(topCard);
+                placeCard('dealer',dealerHand.length,topCard);
+                dealersTotal = calculateTotal(dealerHand,'dealer');
+            }
+            checkWin();
+        }
+    } else{
+        alert("Slow down...you gotta Deal first.")
+    }
 
  })
 
@@ -56,22 +79,27 @@ $('.hit-button').click(()=>{
 // ======================================================================== STAND BUTTON
 
 $('.stand-button').click(()=>{
-    // console.log("User stands!!")
-    // What happens to the players hand, when they stand?
-    // Nothing.
-    // Control passes to the dealer
-    // Rules for the dealer:
-    // 1. If I have less than 17, I MUST hit.
-    // 2. If I have 17 or more I CANNOT hit, even if it
-    // means I will lose
-    let dealersTotal = calculateTotal(dealerHand,'dealer');
-    while (dealersTotal < 17){
-        const topCard = theDeck.shift();
-        dealerHand.push(topCard);
-        placeCard('dealer',dealerHand.length,topCard);
-        dealersTotal = calculateTotal(dealerHand,'dealer');
+    if(oneDeal>0){
+        // console.log("User stands!!")
+        // What happens to the players hand, when they stand?
+        // Nothing.
+        // Control passes to the dealer
+        // Rules for the dealer:
+        // 1. If I have less than 17, I MUST hit.
+        // 2. If I have 17 or more I CANNOT hit, even if it
+        // means I will lose
+        let dealersTotal = calculateTotal(dealerHand,'dealer');
+        while (dealersTotal <21){
+            const topCard = theDeck.shift();
+            dealerHand.push(topCard);
+            placeCard('dealer',dealerHand.length,topCard);
+            dealersTotal = calculateTotal(dealerHand,'dealer');
+        }
+        checkWin();
+        
+    }else{
+        alert("Slow down...you gotta Deal first.")
     }
-    checkWin();
 })
 
 // ==================================================================================== CHECK WIN
@@ -80,54 +108,50 @@ function checkWin(){
     const dealerTotal = calculateTotal(dealerHand,'dealer');
 
      // 1. If the player has > 21, player busts and loses.
-    if (playerTotal > 20){
+    if (playerTotal > 21){
 
-        document.querySelector(`.gameOver`).innerHTML = `YOU LOSE!`
-        document.querySelector(`.gameOver`).style = `transform: scale(200) `
-        $('button').attr("disabled","disabled");
+        gameOverScreen("YOU LOSE!")
+        dealerScore++;
     }
 
    
     // 2. If the dealer has > 21, dealer busts and loses.
-    else if (dealerTotal > 20){
-
-        document.querySelector(`.gameOver`).innerHTML = `YOU WIN!`
-        document.querySelector(`.gameOver`).style = `transform: scale(200) `
-        $('button').attr("disabled","disabled");
+    else if (dealerTotal > 21){
+        
+        gameOverScreen("YOU WIN!")
+        playerScore++;
     }
 
     // 3. If playersHand.length == 2 AND playerTotal == 21... BLACKJACK
 
     else if (playerHand.length ==2 && playerTotal ==21){
-        document.querySelector(`.gameOver`).innerHTML = `BLACKJACK!`
-        document.querySelector(`.gameOver`).style = `transform: scale(200) `
-        $('button').attr("disabled","disabled");
+        gameOverScreen("BLACKJACK!")
+        playerScore++;
     }
     // 4. If dealerHand.length == 2 AND dealersTotal == 21... BLACKJACK
 
     else if (dealerHand.length ==2 && dealersTotal ==21){
-        document.querySelector(`.gameOver`).innerHTML = `BLACKJACK!`
-        document.querySelector(`.gameOver`).style = `transform: scale(200) `
-        $('button').attr("disabled","disabled");
+        gameOverScreen("BLACKJACK!")
+        dealerScore++;
     }
     // 5. If player > dealer, player wins
 
     else if(playerTotal > dealerTotal){
-        document.querySelector(`.gameOver`).innerHTML = `YOU WIN!`
-        document.querySelector(`.gameOver`).style = `transform: scale(200) `
-        $('button').attr("disabled","disabled");
+        gameOverScreen("YOU WIN!")
+        playerScore++;
+
+        
+       
     }
     // 6. if dealer > player, dealer wins
     else if (dealerTotal > playerTotal){
-        document.querySelector(`.gameOver`).innerHTML = `YOU LOSE!`
-        document.querySelector(`.gameOver`).style = `transform: scale(200) `
-        $('button').attr("disabled","disabled");
+        gameOverScreen("YOU LOSE!")
+        dealerScore++;
     }
     // 7. else... push (tie)
     else{
-        document.querySelector(`.gameOver`).innerHTML = `Tie!`
-        document.querySelector(`.gameOver`).style = `transform: scale(200) `
-        $('button').attr("disabled","disabled");
+        gameOverScreen("TIE!")
+        
     }
 }
 
@@ -210,3 +234,75 @@ function shuffleDeck(aDeckToBeShuffled){
     }
     // console.log(aDeckToBeShuffled);
 }
+
+
+// ================================================================================= Game Over Screen
+
+    function gameOverScreen(winOrLose){
+
+        // Announce if you won or lost
+        document.querySelector(`.gameOver`).innerHTML = `${winOrLose}`
+        document.querySelector(`.gameOver`).style = `transform: scale(200) `
+
+        // Hide GameOnButtons
+        document.querySelector(`.buttons`).innerHTML=``;
+
+        // Populate continue Button
+        document.querySelector(`.continueButton`).innerHTML=`
+        <button>Play Again</button>`
+        document.querySelector(`.continueButton button`).style=`
+        
+        display:inline-block;
+        font-family: "Gill Sans", "Gill Sans MT", Calibri, sans-serif;
+        
+        font-size: 18px;
+        text-transform: uppercase;
+        padding: 10px;
+        
+        width: 150px;
+        margin-left: 10px;
+        margin-right: auto;
+        top: 50%;
+        border-radius: 10px;
+        color: white;
+        text-shadow: -1px -1px 1px rgba(0,0,0,0.8);
+        border: 5px solid transparent;
+        border-bottom-color: rgba(0,0,0,0.35);
+        background: darkred;
+        cursor: pointer;
+        outline: 0 !important;
+        transition: all 0.5s;
+        `
+      
+
+        // document.querySelector(`.continueButton:hover`).style=`
+        //     transform: scale(.75);`
+        document.querySelector(`.gameOverButton`).style=`   
+        display: flex;
+        justify-content: center;
+        // margin-right:auto;
+        // margin-left:10%;
+        padding-top: 15px;`
+    }
+
+    // ============================================================================= PLAY AGAIN
+
+$('.continueButton').click(function(){
+    
+    theDeck = freshDeck.slice();
+    playerScore=0;
+    dealerScore=0;
+    oneDeal = 0;
+    placeCard;
+    calculateTotal;
+    playerHand = [];
+    dealerHand = [];
+    
+    document.querySelector(`.gameOver`).innerHTML = ``;
+    document.querySelector(`.gameOver`).style = `transform: scale(0);`;
+    document.querySelector(`.continueButton`).innerHTML=``;
+    document.querySelector(`.continueButton button`).style=``;
+    document.querySelector(`.deal-button`).innerHTML=`Deal`;
+    document.querySelector(`.hit-button`).innerHTML=`Hit`;
+    document.querySelector(`.stand-button`).innerHTML=`Stand`;
+})

@@ -22,7 +22,7 @@ body{
     border-right: 80px solid transparent; */
     border-radius: 0px 0px 60px 60px;
     background-image: url('https://c1.staticflickr.com/4/3585/3446225050_aec0e07e4f_b.jpg');
-  
+    filter: drop-shadow(4px 4px 6px black);
     height: 500px;
  
     max-width: 800px;
@@ -141,3 +141,6 @@ body{
 .deal-button:hover, .hit-button:hover, .stand-button:hover{
     transform: scale(.75);
 }
+
+
+

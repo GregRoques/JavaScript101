@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Card Flip Practice</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="cardFlip.css" />
+    
+</head>
+<body>
+  
+  <h1>Flipping Nacheaux</h1>
+
+    <div class="card">
+        <!-- thing to flip -->
+        <div class="cardHolder">
+            <!-- is a picture face down inside of card holder -->
+            <div class="cardFront">
+                <img src="1.png"/>
+            </div>
+        
+            <!-- is a picture face up inside of card holder -->
+            <div class="cardBack">
+                <img src="2.png"/>
+            </div>
+        </div>
+    </div>
+
+    <!-- <label>Change Perspective</label>
+        <div class="parent">
+            <div class="threeD">
+                Hiss.
+            </div>
+             <div class="threeD2">
+                Meow.
+            </div>
+             <div class="threeD3">
+                Purr.
+            </div> -->
+
+    
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+    $('.cardHolder').click(function(){
+        $(this).toggleClass('flip')
+})
+</script>
+</body>
+</html>
