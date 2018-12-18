@@ -7,8 +7,8 @@ let playerHand = [];
 let dealerHand = [];
 $('.continueButton').hide()
 
-document.querySelector(`.playerNameScore`).innerHTML = `${playerScore}`;
-document.querySelector(`.dealerNameScore`).innerHTML = `${dealerScore}`;
+
+
 
 // ======================================================================== DEAL BUTTON
 
@@ -115,6 +115,12 @@ function checkWin(){
     if (playerTotal > 21){
         dealerScore++;
         document.querySelector(`.dealerNameScore`).innerHTML = `${dealerScore}`;
+
+        if (dealerScore % 2 !=0){
+        document.querySelector(`.dealerNameScore`).style = `transform: rotateY(360deg);`;
+        } else{
+            document.querySelector(`.dealerNameScore`).style = `transform: rotateY(0deg);`;
+        }
         gameOverScreen("YOU LOSE!")
         
     }
@@ -124,6 +130,12 @@ function checkWin(){
     else if (dealerTotal > 21){
         playerScore++;
         document.querySelector(`.playerNameScore`).innerHTML = `${playerScore}`;
+
+        if (playerScore % 2 !=0){
+        document.querySelector(`.playerNameScore`).style = `transform: rotateY(360deg);`;
+        } else{
+            document.querySelector(`.playerNameScore`).style = `transform: rotateY(0deg);`;
+        }
         gameOverScreen("YOU WIN!")
         
     }
@@ -133,6 +145,12 @@ function checkWin(){
     else if (playerHand.length ==2 && playerTotal ==21){
         playerScore++;
         document.querySelector(`.playerNameScore`).innerHTML = `${playerScore}`;
+
+        if (playerScore % 2 !=0){
+        document.querySelector(`.playerNameScore`).style = `transform: rotateY(360deg);`;
+        } else{
+            document.querySelector(`.playerNameScore`).style = `transform: rotateY(0deg);`;
+        }
         gameOverScreen("BLACKJACK!")
         
     }
@@ -141,6 +159,12 @@ function checkWin(){
     else if (dealerHand.length ==2 && dealersTotal ==21){
         dealerScore++;
         document.querySelector(`.dealerNameScore`).innerHTML = `${dealerScore}`;
+
+        if (dealerScore % 2 !=0){
+        document.querySelector(`.dealerNameScore`).style = `transform: rotateY(360deg);`;
+        } else{
+            document.querySelector(`.dealerNameScore`).style = `transform: rotateY(0deg);`;
+        }
         gameOverScreen("BLACKJACK!")
         
     }
@@ -149,12 +173,24 @@ function checkWin(){
     else if(playerTotal > dealerTotal){
         playerScore++;
         document.querySelector(`.playerNameScore`).innerHTML = `${playerScore}`;
+
+        if (playerScore % 2 !=0){
+        document.querySelector(`.playerNameScore`).style = `transform: rotateY(360deg);`;
+        } else{
+            document.querySelector(`.playerNameScore`).style = `transform: rotateY(0deg);`;
+        }
         gameOverScreen("YOU WIN!")
     }
     // 6. if dealer > player, dealer wins
     else if (dealerTotal > playerTotal){
         dealerScore++;
         document.querySelector(`.dealerNameScore`).innerHTML = `${dealerScore}`;
+
+        if (dealerScore % 2 !=0){
+        document.querySelector(`.dealerNameScore`).style = `transform: rotateY(360deg);`;
+        } else{
+            document.querySelector(`.dealerNameScore`).style = `transform: rotateY(0deg);`;
+        }
         gameOverScreen("YOU LOSE!")
         
     }
