@@ -7,6 +7,9 @@ let playerHand = [];
 let dealerHand = [];
 $('.continueButton').hide()
 
+document.querySelector(`.playerNameScore`).innerHTML = `${playerScore}`;
+document.querySelector(`.dealerNameScore`).innerHTML = `${dealerScore}`;
+
 // ======================================================================== DEAL BUTTON
 
 // blackjack deal function
@@ -110,44 +113,50 @@ function checkWin(){
 
      // 1. If the player has > 21, player busts and loses.
     if (playerTotal > 21){
-
-        gameOverScreen("YOU LOSE!")
         dealerScore++;
+        document.querySelector(`.dealerNameScore`).innerHTML = `${dealerScore}`;
+        gameOverScreen("YOU LOSE!")
+        
     }
 
    
     // 2. If the dealer has > 21, dealer busts and loses.
     else if (dealerTotal > 21){
-        
-        gameOverScreen("YOU WIN!")
         playerScore++;
+        document.querySelector(`.playerNameScore`).innerHTML = `${playerScore}`;
+        gameOverScreen("YOU WIN!")
+        
     }
 
     // 3. If playersHand.length == 2 AND playerTotal == 21... BLACKJACK
 
     else if (playerHand.length ==2 && playerTotal ==21){
-        gameOverScreen("BLACKJACK!")
         playerScore++;
+        document.querySelector(`.playerNameScore`).innerHTML = `${playerScore}`;
+        gameOverScreen("BLACKJACK!")
+        
     }
     // 4. If dealerHand.length == 2 AND dealersTotal == 21... BLACKJACK
 
     else if (dealerHand.length ==2 && dealersTotal ==21){
-        gameOverScreen("BLACKJACK!")
         dealerScore++;
+        document.querySelector(`.dealerNameScore`).innerHTML = `${dealerScore}`;
+        gameOverScreen("BLACKJACK!")
+        
     }
     // 5. If player > dealer, player wins
 
     else if(playerTotal > dealerTotal){
-        gameOverScreen("YOU WIN!")
         playerScore++;
-
-        
-       
+        document.querySelector(`.playerNameScore`).innerHTML = `${playerScore}`;
+        gameOverScreen("YOU WIN!")
     }
     // 6. if dealer > player, dealer wins
     else if (dealerTotal > playerTotal){
-        gameOverScreen("YOU LOSE!")
         dealerScore++;
+        document.querySelector(`.dealerNameScore`).innerHTML = `${dealerScore}`;
+        gameOverScreen("YOU LOSE!")
+        
     }
     // 7. else... push (tie)
     else{
@@ -269,7 +278,7 @@ function shuffleDeck(aDeckToBeShuffled){
             }
             document.querySelector(`.player-total`).innerHTML = `0`;
             document.querySelector(`.dealer-total`).innerHTML = `0`;
-
+           
             oneDeal = 0;
             playerHand = [];
             dealerHand = [];
