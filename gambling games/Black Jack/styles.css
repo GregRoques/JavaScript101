@@ -24,8 +24,9 @@ body{
     background-image: url('https://c1.staticflickr.com/4/3585/3446225050_aec0e07e4f_b.jpg');
     filter: drop-shadow(4px 4px 6px black);
     height: 500px;
+    margin-top:-25px
  
-    max-width: 800px;
+    
 }
 
 .player-total, .dealer-total{
@@ -50,12 +51,21 @@ body{
 
 .title{
     font-family: 'Pacifico', cursive;
-    font-size: 60px;
+    font-size: 105px;
     text-align: center;
+    height:150px;
+    color:white;
+    text-shadow: 2px 2px 4px gray;
+    margin-bottom: -125px;
+  
+}
 
-    text-shadow: 2px 2px black;
-    color: white;
-    
+.avatarAlign{
+    display: inline-block;
+    position: absolute;
+    margin-right:auto;
+    margin-left: auto;
+
 }
 
 .bulldog{
@@ -97,7 +107,7 @@ body{
     text-align: center;
     margin-right: auto;
     margin-left: auto; 
-   padding: 1px
+   padding: 1px;
     
 }
 
@@ -142,5 +152,71 @@ body{
     transform: scale(.75);
 }
 
+.continueButton{
+    display:inline-block;
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, sans-serif;
+    
+    font-size: 18px;
+    text-transform: uppercase;
+    padding: 10px;
+    
+    width: 150px;
+    margin-left: 10px;
+    margin-right: auto;
+    top: 50%;
+    border-radius: 10px;
+    color: white;
+    text-shadow: -1px -1px 1px rgba(0,0,0,0.8);
+    border: 5px solid transparent;
+    border-bottom-color: rgba(0,0,0,0.35);
+    background: darkred;
+    cursor: pointer;
+    outline: 0 !important;
+    transition: all 0.5s;
+    
+}
+
+.continueButton:hover{
+    transform: scale(.75);
+}
 
 
+.gameOverButton{
+    display: absolute;
+    justify-content: center;
+    margin-right:auto;
+    margin-left:40%;
+    padding-top: 15px;
+    display: inline-block;
+    position: absolute;
+    z-index: inherit;
+}
+
+.playerAvatar{
+    height: 175px;
+    width: 175px;
+    border: 2px solid goldenrod;
+    background-color: white;
+    border-radius: 100%;
+    background-image: url("1.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: inline-block;
+}
+
+.dealerAvatar{
+    height: 175px;
+    width: 175px;
+    border: 2px solid goldenrod;
+    background-color: white;
+    border-radius: 100%;
+    background-image: url("2.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    display: inline-block;
+    margin-left:auto;
+    margin-right: auto;
+    position:absolute;
+    right:1%;
+    }

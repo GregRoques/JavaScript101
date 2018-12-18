@@ -5,6 +5,7 @@ let dealerScore=0;
 let oneDeal = 0
 let playerHand = [];
 let dealerHand = [];
+$('.continueButton').hide()
 
 // ======================================================================== DEAL BUTTON
 
@@ -245,64 +246,33 @@ function shuffleDeck(aDeckToBeShuffled){
         document.querySelector(`.gameOver`).style = `transform: scale(200) `
 
         // Hide GameOnButtons
-        document.querySelector(`.buttons`).innerHTML=``;
+        $(`.buttons`).hide()
+        $('.continueButton').show()
 
         // Populate continue Button
-        document.querySelector(`.continueButton`).innerHTML=`
+        $(`.continueButton`).innerHTML=`
         <button>Play Again</button>`
-        document.querySelector(`.continueButton button`).style=`
         
-        display:inline-block;
-        font-family: "Gill Sans", "Gill Sans MT", Calibri, sans-serif;
         
-        font-size: 18px;
-        text-transform: uppercase;
-        padding: 10px;
+        $('.continueButton').click(function(){
+            console.log("continue")
         
-        width: 150px;
-        margin-left: 10px;
-        margin-right: auto;
-        top: 50%;
-        border-radius: 10px;
-        color: white;
-        text-shadow: -1px -1px 1px rgba(0,0,0,0.8);
-        border: 5px solid transparent;
-        border-bottom-color: rgba(0,0,0,0.35);
-        background: darkred;
-        cursor: pointer;
-        outline: 0 !important;
-        transition: all 0.5s;
-        `
-      
+            
+            document.querySelector(`.gameOver`).innerHTML = ``;
+            document.querySelector(`.gameOver`).style = `transform: scale(0);`;
+            $(`.buttons`).show()
+            $('.continueButton').hide()
+           
+            for(let i=1; i<=6; i++){
+                const classSelector = `.card-${i}`;
+                $(classSelector).html(``);
+            }
+            document.querySelector(`.player-total`).innerHTML = `0`;
+            document.querySelector(`.dealer-total`).innerHTML = `0`;
 
-        // document.querySelector(`.continueButton:hover`).style=`
-        //     transform: scale(.75);`
-        document.querySelector(`.gameOverButton`).style=`   
-        display: flex;
-        justify-content: center;
-        // margin-right:auto;
-        // margin-left:10%;
-        padding-top: 15px;`
+            oneDeal = 0;
+            playerHand = [];
+            dealerHand = [];
+
+        })
     }
-
-    // ============================================================================= PLAY AGAIN
-
-$('.continueButton').click(function(){
-    
-    theDeck = freshDeck.slice();
-    playerScore=0;
-    dealerScore=0;
-    oneDeal = 0;
-    placeCard;
-    calculateTotal;
-    playerHand = [];
-    dealerHand = [];
-    
-    document.querySelector(`.gameOver`).innerHTML = ``;
-    document.querySelector(`.gameOver`).style = `transform: scale(0);`;
-    document.querySelector(`.continueButton`).innerHTML=``;
-    document.querySelector(`.continueButton button`).style=``;
-    document.querySelector(`.deal-button`).innerHTML=`Deal`;
-    document.querySelector(`.hit-button`).innerHTML=`Hit`;
-    document.querySelector(`.stand-button`).innerHTML=`Stand`;
-})
