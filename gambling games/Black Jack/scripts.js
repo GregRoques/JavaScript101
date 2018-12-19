@@ -1,3 +1,5 @@
+// ==================================================== =================== Global Variables & Hiding Continue Button During GamePlay
+
 const freshDeck = createDeck();
 let theDeck = freshDeck.slice();
 let playerScore=0;
@@ -46,7 +48,7 @@ $('.deal-button').click(()=>{
         calculateTotal(dealerHand,'dealer')
         oneDeal = 20;
     }else{
-        alert("You must Hit or Stand");
+        swal("You must Hit or Stand");
     }
 })
 
@@ -65,7 +67,7 @@ $('.hit-button').click(()=>{
         calculateTotal(playerHand, 'player')   
         }else{
             let dealersTotal = calculateTotal(dealerHand,'dealer');
-            while (dealersTotal <21){
+            while (dealersTotal <17){
                 const topCard = theDeck.shift();
                 dealerHand.push(topCard);
                 placeCard('dealer',dealerHand.length,topCard);
@@ -74,7 +76,7 @@ $('.hit-button').click(()=>{
             checkWin();
         }
     } else{
-        alert("Slow down...you gotta Deal first.")
+        swal("Slow down...you gotta Deal first.")
     }
 
  })
@@ -93,7 +95,7 @@ $('.stand-button').click(()=>{
         // 2. If I have 17 or more I CANNOT hit, even if it
         // means I will lose
         let dealersTotal = calculateTotal(dealerHand,'dealer');
-        while (dealersTotal <21){
+        while (dealersTotal <17){
             const topCard = theDeck.shift();
             dealerHand.push(topCard);
             placeCard('dealer',dealerHand.length,topCard);
@@ -102,7 +104,7 @@ $('.stand-button').click(()=>{
         checkWin();
         
     }else{
-        alert("Slow down...you gotta Deal first.")
+        swal("Slow down...you gotta Deal first.")
     }
 })
 
