@@ -66,13 +66,7 @@ $('.hit-button').click(()=>{
         placeCard('player',playerHand.length,topCard)
         calculateTotal(playerHand, 'player')   
         }else{
-            let dealersTotal = calculateTotal(dealerHand,'dealer');
-            while (dealersTotal <17){
-                const topCard = theDeck.shift();
-                dealerHand.push(topCard);
-                placeCard('dealer',dealerHand.length,topCard);
-                dealersTotal = calculateTotal(dealerHand,'dealer');
-            }
+           
             checkWin();
         }
     } else{
@@ -86,14 +80,6 @@ $('.hit-button').click(()=>{
 
 $('.stand-button').click(()=>{
     if(oneDeal>0){
-        // console.log("User stands!!")
-        // What happens to the players hand, when they stand?
-        // Nothing.
-        // Control passes to the dealer
-        // Rules for the dealer:
-        // 1. If I have less than 17, I MUST hit.
-        // 2. If I have 17 or more I CANNOT hit, even if it
-        // means I will lose
         let dealersTotal = calculateTotal(dealerHand,'dealer');
         while (dealersTotal <17){
             const topCard = theDeck.shift();
@@ -206,23 +192,25 @@ function checkWin(){
 // ======================================================================== CALCULATE TOTAL
 
 function calculateTotal(hand, who){
-    // purpose:
-    // 1. Find out the number and return
-    // 2. Update the DOM with the right number for
-    // whoever's hand it is
     let handTotal = 0;
-    // Loop through the hand
+    let numAces = 0;
+    let hasAce = false;
+   
     hand.forEach((card,i)=>{
-        // console.log(card);
-        // copy everything in the String, EXCEPT for the last
-        // char
         let thisCardsValue = card.slice(0,-1);
-        // handle J, Q, K
+      
         if(thisCardsValue > 10){
-            thisCardsValue = 10;
+            thisCardsValue = 10; 
+        }else if(thisCardsValue == 1){   
+            hasAce = true;
         }
         handTotal += Number(thisCardsValue);
     })
+  
+    if(hasAce & handTotal <= 10){
+        handTotal += 10;
+    }
+    
     console.log(handTotal)
     const classSelector = `.${who}-total`;
     $(classSelector).html(handTotal);
