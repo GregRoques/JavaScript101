@@ -224,8 +224,24 @@ function placeCard(who,where,what){
     // who = ? ... option 1: 'player', option: 'dealer'
     // where = ? ... option 1-6
     // what = ? ... 1h-13h, 1s-13s, 1d-13d, 1c-13c 
-    const classSelector = `.${who}-cards .card-${where}`;
-    $(classSelector).html(`<img src="cards/${what}.png" />`);
+    const classSelector = `.${who}CardHolder .card-${where}`;
+    let memoryHTML = ``;
+
+
+    memoryHTML = `
+        <div class="card">
+            <div class="card-holder">
+                <div class="card-front"><img src="cards/${what}.png" /></div>
+                <div class="card-back"></div>
+                
+            </div>
+        </div>`
+
+
+    $(classSelector).html(memoryHTML);
+
+    
+    
 }
 
 // ======================================================================== CREATE DECK
